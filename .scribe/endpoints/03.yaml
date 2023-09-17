@@ -1,0 +1,64 @@
+name: 'Comment Management'
+description: |-
+
+  APIs to manage the comment resource
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: 'api/movies/{id}/comments'
+    metadata:
+      groupName: 'Comment Management'
+      groupDescription: |-
+
+        APIs to manage the comment resource
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the movie.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: vernie23@example.org
+        type: string
+        enumValues: []
+        custom: []
+      body:
+        name: body
+        description: ''
+        required: true
+        example: eos
+        type: string
+        enumValues: []
+        custom: []
+    cleanBodyParameters:
+      email: vernie23@example.org
+      body: eos
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

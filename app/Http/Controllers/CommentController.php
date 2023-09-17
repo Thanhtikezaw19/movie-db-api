@@ -7,6 +7,11 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
+/**
+ * @group Comment Management
+ *
+ * APIs to manage the comment resource
+ */
 
 class CommentController extends Controller
 {

@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\Facade as PDF;
 
-
+/**
+ * @group Movie Management
+ *
+ * APIs to manage the movie resource
+ */
 class MovieController extends Controller
 {
+
     public function index()
     {
         $movies = Movie::with('comments')->paginate(10);
@@ -20,12 +25,12 @@ class MovieController extends Controller
             return $movie;
         });
 
-        return response()->json($movies);
+        return response()->json(['data' => $movies]);
     }
 
     public function show($id)
     {
-        $movie = Movie::find($id);
+        $movie = Movie::with('comments')->find($id);
 
         if (!$movie) {
             return response()->json(['error' => 'Movie not found'], 404);
@@ -113,6 +118,7 @@ class MovieController extends Controller
     {
         //Get the current movie
         $current_movie = Movie::findOrFail($id);
+
 
         // Define the criteria for related movies
         $criteria = [
