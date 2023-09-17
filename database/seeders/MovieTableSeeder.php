@@ -8,6 +8,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use App\Models\Movie;
+use App\Models\Comment;
 
 
 class MovieTableSeeder extends Seeder
@@ -26,7 +28,7 @@ class MovieTableSeeder extends Seeder
 
         // Seed the "movies" table with sample data
         for ($i = 0; $i < 20; $i++) {
-            DB::table('movies')->insert([
+            $movie = DB::table('movies')->insertGetId([
                 'title' => $faker->sentence(3),
                 'summary' => $faker->paragraph(3),
                 'cover_image' => $faker->imageUrl(640, 480, 'movies', true),
@@ -37,6 +39,15 @@ class MovieTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Seed comments for each movie
+            for ($j = 0; $j < rand(1, 5); $j++) {
+                Comment::create([
+                    'movie_id' => $movie,
+                    'commenter_email' => $faker->email,
+                    'body' => $faker->paragraph,
+                ]);
+            }
         }
     }
 }

@@ -6,6 +6,17 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 
+
+Route::get('/healthcheck', function () {
+    return [
+        'status' => 'up',
+        'services' => [
+            'database' => 'up',
+            'redis' => 'up',
+        ],
+    ];
+});
+
 // For Authenticatioon control
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);

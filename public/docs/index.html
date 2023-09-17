@@ -1,0 +1,1894 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var tryItOutBaseUrl = "http://localhost";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-4.24.0.js"></script>
+
+    <script src="../docs/js/theme-default-4.24.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image"/>
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-auth-management" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="auth-management">
+                    <a href="#auth-management">Auth Management</a>
+                </li>
+                                    <ul id="tocify-subheader-auth-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="auth-management-POSTapi-register">
+                                <a href="#auth-management-POSTapi-register">POST api/register</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="auth-management-POSTapi-login">
+                                <a href="#auth-management-POSTapi-login">POST api/login</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-comment-management" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="comment-management">
+                    <a href="#comment-management">Comment Management</a>
+                </li>
+                                    <ul id="tocify-subheader-comment-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="comment-management-POSTapi-movies--id--comments">
+                                <a href="#comment-management-POSTapi-movies--id--comments">POST api/movies/{id}/comments</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-healthcheck">
+                                <a href="#endpoints-GETapi-healthcheck">GET api/healthcheck</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-movie-management" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="movie-management">
+                    <a href="#movie-management">Movie Management</a>
+                </li>
+                                    <ul id="tocify-subheader-movie-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="movie-management-POSTapi-movies">
+                                <a href="#movie-management-POSTapi-movies">POST api/movies</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="movie-management-PUTapi-movies--id-">
+                                <a href="#movie-management-PUTapi-movies--id-">PUT api/movies/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="movie-management-DELETEapi-movies--id-">
+                                <a href="#movie-management-DELETEapi-movies--id-">DELETE api/movies/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="movie-management-GETapi-movies">
+                                <a href="#movie-management-GETapi-movies">GET api/movies</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="movie-management-GETapi-movies--id-">
+                                <a href="#movie-management-GETapi-movies--id-">GET api/movies/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="movie-management-GETapi-movies--id--related">
+                                <a href="#movie-management-GETapi-movies--id--related">GET api/movies/{id}/related</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+    <ul class="toc-footer" id="toc-footer">
+                    <li style="padding-bottom: 5px;"><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li style="padding-bottom: 5px;"><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+    </ul>
+
+    <ul class="toc-footer" id="last-updated">
+        <li>Last updated: September 17, 2023</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<aside>
+    <strong>Base URL</strong>: <code>http://localhost</code>
+</aside>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="auth-management">Auth Management</h1>
+
+    <p>APIs to manage the Auth resource</p>
+
+                                <h2 id="auth-management-POSTapi-register">POST api/register</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"gstnchhfigqarazflkyorzird\",
+    \"email\": \"crooks.barney@example.org\",
+    \"password\": \"yboCNBCa)\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "gstnchhfigqarazflkyorzird",
+    "email": "crooks.barney@example.org",
+    "password": "yboCNBCa)"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-register">
+</span>
+<span id="execution-results-POSTapi-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-register"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-register">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-register" data-method="POST"
+      data-path="api/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-register"
+                    onclick="tryItOut('POSTapi-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-register"
+                    onclick="cancelTryOut('POSTapi-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-register"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/register</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-register"
+               value="gstnchhfigqarazflkyorzird"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>gstnchhfigqarazflkyorzird</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-register"
+               value="crooks.barney@example.org"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>crooks.barney@example.org</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-register"
+               value="yboCNBCa)"
+               data-component="body">
+    <br>
+<p>Must be at least 6 characters. Example: <code>yboCNBCa)</code></p>
+        </div>
+        </form>
+
+                    <h2 id="auth-management-POSTapi-login">POST api/login</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"murphy.prosacco@example.org\",
+    \"password\": \"0tW;*3)dXZ7@bb\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "murphy.prosacco@example.org",
+    "password": "0tW;*3)dXZ7@bb"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-login">
+</span>
+<span id="execution-results-POSTapi-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-login"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-login">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-login" data-method="POST"
+      data-path="api/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-login"
+                    onclick="tryItOut('POSTapi-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-login"
+                    onclick="cancelTryOut('POSTapi-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-login"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/login</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-login"
+               value="murphy.prosacco@example.org"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>murphy.prosacco@example.org</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-login"
+               value="0tW;*3)dXZ7@bb"
+               data-component="body">
+    <br>
+<p>Example: <code>0tW;*3)dXZ7@bb</code></p>
+        </div>
+        </form>
+
+                <h1 id="comment-management">Comment Management</h1>
+
+    <p>APIs to manage the comment resource</p>
+
+                                <h2 id="comment-management-POSTapi-movies--id--comments">POST api/movies/{id}/comments</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-movies--id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/movies/1/comments" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"vernie23@example.org\",
+    \"body\": \"eos\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies/1/comments"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "vernie23@example.org",
+    "body": "eos"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-movies--id--comments">
+</span>
+<span id="execution-results-POSTapi-movies--id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-movies--id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-movies--id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-movies--id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-movies--id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-movies--id--comments" data-method="POST"
+      data-path="api/movies/{id}/comments"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-movies--id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-movies--id--comments"
+                    onclick="tryItOut('POSTapi-movies--id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-movies--id--comments"
+                    onclick="cancelTryOut('POSTapi-movies--id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-movies--id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/movies/{id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-movies--id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-movies--id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-movies--id--comments"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the movie. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-movies--id--comments"
+               value="vernie23@example.org"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>vernie23@example.org</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>body</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="body"                data-endpoint="POSTapi-movies--id--comments"
+               value="eos"
+               data-component="body">
+    <br>
+<p>Example: <code>eos</code></p>
+        </div>
+        </form>
+
+                <h1 id="endpoints">Endpoints</h1>
+
+    
+
+                                <h2 id="endpoints-GETapi-healthcheck">GET api/healthcheck</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-healthcheck">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/healthcheck" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/healthcheck"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-healthcheck">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;up&quot;,
+    &quot;services&quot;: {
+        &quot;database&quot;: &quot;up&quot;,
+        &quot;redis&quot;: &quot;up&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-healthcheck" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-healthcheck"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-healthcheck"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-healthcheck" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-healthcheck">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-healthcheck" data-method="GET"
+      data-path="api/healthcheck"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-healthcheck', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-healthcheck"
+                    onclick="tryItOut('GETapi-healthcheck');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-healthcheck"
+                    onclick="cancelTryOut('GETapi-healthcheck');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-healthcheck"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/healthcheck</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-healthcheck"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-healthcheck"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="movie-management">Movie Management</h1>
+
+    <p>APIs to manage the movie resource</p>
+
+                                <h2 id="movie-management-POSTapi-movies">POST api/movies</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-movies">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/movies" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "title=ad"\
+    --form "summary=voluptas"\
+    --form "genres=iusto"\
+    --form "author=ipsa"\
+    --form "tags=eos"\
+    --form "imdb_rating=4"\
+    --form "cover_image=@C:\Users\ThanHtikeZaw\AppData\Local\Temp\php17C6.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('title', 'ad');
+body.append('summary', 'voluptas');
+body.append('genres', 'iusto');
+body.append('author', 'ipsa');
+body.append('tags', 'eos');
+body.append('imdb_rating', '4');
+body.append('cover_image', document.querySelector('input[name="cover_image"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-movies">
+</span>
+<span id="execution-results-POSTapi-movies" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-movies"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-movies"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-movies" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-movies">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-movies" data-method="POST"
+      data-path="api/movies"
+      data-authed="0"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-movies', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-movies"
+                    onclick="tryItOut('POSTapi-movies');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-movies"
+                    onclick="cancelTryOut('POSTapi-movies');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-movies"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/movies</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-movies"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-movies"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="POSTapi-movies"
+               value="ad"
+               data-component="body">
+    <br>
+<p>Example: <code>ad</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>summary</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="summary"                data-endpoint="POSTapi-movies"
+               value="voluptas"
+               data-component="body">
+    <br>
+<p>Example: <code>voluptas</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="cover_image"                data-endpoint="POSTapi-movies"
+               value=""
+               data-component="body">
+    <br>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ThanHtikeZaw\AppData\Local\Temp\php17C6.tmp</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>genres</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="genres"                data-endpoint="POSTapi-movies"
+               value="iusto"
+               data-component="body">
+    <br>
+<p>Example: <code>iusto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>author</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="author"                data-endpoint="POSTapi-movies"
+               value="ipsa"
+               data-component="body">
+    <br>
+<p>Example: <code>ipsa</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>tags</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="tags"                data-endpoint="POSTapi-movies"
+               value="eos"
+               data-component="body">
+    <br>
+<p>Example: <code>eos</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>imdb_rating</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="imdb_rating"                data-endpoint="POSTapi-movies"
+               value="4"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Must not be greater than 10. Example: <code>4</code></p>
+        </div>
+        </form>
+
+                    <h2 id="movie-management-PUTapi-movies--id-">PUT api/movies/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-movies--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/movies/nihil" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies/nihil"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-movies--id-">
+</span>
+<span id="execution-results-PUTapi-movies--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-movies--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-movies--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-movies--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-movies--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-movies--id-" data-method="PUT"
+      data-path="api/movies/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-movies--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-movies--id-"
+                    onclick="tryItOut('PUTapi-movies--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-movies--id-"
+                    onclick="cancelTryOut('PUTapi-movies--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-movies--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/movies/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-movies--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-movies--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-movies--id-"
+               value="nihil"
+               data-component="url">
+    <br>
+<p>The ID of the movie. Example: <code>nihil</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="movie-management-DELETEapi-movies--id-">DELETE api/movies/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-movies--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/movies/blanditiis" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies/blanditiis"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-movies--id-">
+</span>
+<span id="execution-results-DELETEapi-movies--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-movies--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-movies--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-movies--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-movies--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-movies--id-" data-method="DELETE"
+      data-path="api/movies/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-movies--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-movies--id-"
+                    onclick="tryItOut('DELETEapi-movies--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-movies--id-"
+                    onclick="cancelTryOut('DELETEapi-movies--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-movies--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/movies/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-movies--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-movies--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-movies--id-"
+               value="blanditiis"
+               data-component="url">
+    <br>
+<p>The ID of the movie. Example: <code>blanditiis</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="movie-management-GETapi-movies">GET api/movies</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-movies">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/movies" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-movies">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;data&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;title&quot;: &quot;Quidem voluptas officia.&quot;,
+                &quot;summary&quot;: &quot;Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores&quot;,
+                &quot;genres&quot;: &quot;Sci-Fi&quot;,
+                &quot;author&quot;: &quot;Michael Johnson&quot;,
+                &quot;tags&quot;: &quot;Romance,Thriller,Fantasy&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;6.1&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/1/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Iusto qui hic.&quot;,
+                &quot;summary&quot;: &quot;Sunt molestiae non recusandae quia. Nesciunt perspiciatis voluptatem eos beatae. Voluptatem adipisci ut eaque laboriosam sit ea.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/00ddaa?text=movies+inventore&quot;,
+                &quot;genres&quot;: &quot;Horror&quot;,
+                &quot;author&quot;: &quot;Michael Johnson&quot;,
+                &quot;tags&quot;: &quot;Thriller,Romance,Adventure&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;2.3&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/2/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 3,
+                &quot;title&quot;: &quot;Quas atque.&quot;,
+                &quot;summary&quot;: &quot;Culpa perspiciatis quidem dicta necessitatibus error. Perferendis maiores expedita sequi in fugit atque. Inventore et eaque impedit quia. Natus ipsum voluptas est quisquam ea voluptatem debitis.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/007700?text=movies+dolore&quot;,
+                &quot;genres&quot;: &quot;Drama&quot;,
+                &quot;author&quot;: &quot;Jane Smith&quot;,
+                &quot;tags&quot;: &quot;Mystery,Fantasy,Thriller&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;1.8&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/3/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 4,
+                &quot;title&quot;: &quot;Aliquid mollitia dolores enim.&quot;,
+                &quot;summary&quot;: &quot;Magnam illum omnis incidunt natus quod omnis voluptas. Est facere et labore minima aliquam debitis fuga eligendi. Neque enim sint velit tempore ipsum inventore.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/003300?text=movies+et&quot;,
+                &quot;genres&quot;: &quot;Comedy&quot;,
+                &quot;author&quot;: &quot;Jane Smith&quot;,
+                &quot;tags&quot;: &quot;Thriller,Romance,Fantasy&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;4.5&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/4/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 5,
+                &quot;title&quot;: &quot;Aliquam reiciendis dolores.&quot;,
+                &quot;summary&quot;: &quot;Ut ipsa dignissimos ex pariatur. Facilis et non quibusdam quos debitis. Accusantium possimus dolorum fugiat ut. Dolore autem voluptas sequi tempora commodi reprehenderit dolorem. Qui molestiae cumque sint autem illo est ducimus.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/00ffee?text=movies+repellendus&quot;,
+                &quot;genres&quot;: &quot;Comedy&quot;,
+                &quot;author&quot;: &quot;Jane Smith&quot;,
+                &quot;tags&quot;: &quot;Mystery,Adventure,Thriller&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;4.1&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/5/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 6,
+                &quot;title&quot;: &quot;Aut animi et facilis placeat.&quot;,
+                &quot;summary&quot;: &quot;Quibusdam consequatur molestias animi accusamus quia rerum fugit. Ea eligendi cum cum maiores veritatis. Voluptates explicabo et sunt et.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/002211?text=movies+est&quot;,
+                &quot;genres&quot;: &quot;Drama&quot;,
+                &quot;author&quot;: &quot;Michael Johnson&quot;,
+                &quot;tags&quot;: &quot;Fantasy,Adventure,Romance&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;2.5&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/6/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 7,
+                &quot;title&quot;: &quot;Autem quod.&quot;,
+                &quot;summary&quot;: &quot;Nemo quo reprehenderit beatae et qui maxime et sit. Tempore doloribus et at. Nihil tempora quos consequatur. Et sed et suscipit similique est necessitatibus placeat.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/000022?text=movies+aut&quot;,
+                &quot;genres&quot;: &quot;Drama&quot;,
+                &quot;author&quot;: &quot;John Doe&quot;,
+                &quot;tags&quot;: &quot;Romance,Mystery,Fantasy&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;2.9&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/7/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 8,
+                &quot;title&quot;: &quot;Et sint.&quot;,
+                &quot;summary&quot;: &quot;Voluptatibus adipisci vitae voluptatem quia magnam blanditiis. Sed error similique ab ut. Occaecati quia nihil occaecati totam aut consequatur sit consequatur. Nobis molestias totam labore eum eaque doloremque accusamus.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/005522?text=movies+ex&quot;,
+                &quot;genres&quot;: &quot;Sci-Fi&quot;,
+                &quot;author&quot;: &quot;Robert Wilson&quot;,
+                &quot;tags&quot;: &quot;Adventure,Romance,Mystery&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;10.0&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/8/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 9,
+                &quot;title&quot;: &quot;Totam nemo et.&quot;,
+                &quot;summary&quot;: &quot;Veniam qui sequi facere porro iste. Beatae praesentium dolorum quis qui et assumenda atque culpa. Eius doloremque sapiente ut reprehenderit. Illo fuga dolor labore amet ipsum.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/0066ff?text=movies+voluptatibus&quot;,
+                &quot;genres&quot;: &quot;Sci-Fi&quot;,
+                &quot;author&quot;: &quot;John Doe&quot;,
+                &quot;tags&quot;: &quot;Adventure,Fantasy,Romance&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;2.7&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/9/download-pdf&quot;,
+                &quot;comments&quot;: []
+            },
+            {
+                &quot;id&quot;: 10,
+                &quot;title&quot;: &quot;Ducimus voluptatem totam.&quot;,
+                &quot;summary&quot;: &quot;Corporis ea et assumenda sed. Est eligendi perspiciatis ad mollitia amet dolorum. Exercitationem nemo aut vel aut. Nihil et eius exercitationem quibusdam. Et qui architecto dolorum sed magni beatae aut.&quot;,
+                &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/000088?text=movies+est&quot;,
+                &quot;genres&quot;: &quot;Drama&quot;,
+                &quot;author&quot;: &quot;Jane Smith&quot;,
+                &quot;tags&quot;: &quot;Adventure,Romance,Thriller&quot;,
+                &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+                &quot;imdb_rating&quot;: &quot;8.2&quot;,
+                &quot;pdf_download_link&quot;: &quot;http://localhost/api/movies/10/download-pdf&quot;,
+                &quot;comments&quot;: []
+            }
+        ],
+        &quot;first_page_url&quot;: &quot;http://localhost/api/movies?page=1&quot;,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 4,
+        &quot;last_page_url&quot;: &quot;http://localhost/api/movies?page=4&quot;,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/movies?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/movies?page=2&quot;,
+                &quot;label&quot;: &quot;2&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/movies?page=3&quot;,
+                &quot;label&quot;: &quot;3&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/movies?page=4&quot;,
+                &quot;label&quot;: &quot;4&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://localhost/api/movies?page=2&quot;,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;next_page_url&quot;: &quot;http://localhost/api/movies?page=2&quot;,
+        &quot;path&quot;: &quot;http://localhost/api/movies&quot;,
+        &quot;per_page&quot;: 10,
+        &quot;prev_page_url&quot;: null,
+        &quot;to&quot;: 10,
+        &quot;total&quot;: 40
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-movies" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-movies"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-movies"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-movies" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-movies">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-movies" data-method="GET"
+      data-path="api/movies"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-movies', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-movies"
+                    onclick="tryItOut('GETapi-movies');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-movies"
+                    onclick="cancelTryOut('GETapi-movies');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-movies"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/movies</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-movies"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-movies"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="movie-management-GETapi-movies--id-">GET api/movies/{id}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-movies--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/movies/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-movies--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 57
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Quidem voluptas officia.&quot;,
+    &quot;summary&quot;: &quot;Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.&quot;,
+    &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores&quot;,
+    &quot;genres&quot;: &quot;Sci-Fi&quot;,
+    &quot;author&quot;: &quot;Michael Johnson&quot;,
+    &quot;tags&quot;: &quot;Romance,Thriller,Fantasy&quot;,
+    &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+    &quot;imdb_rating&quot;: &quot;6.1&quot;,
+    &quot;pdf_download_link&quot;: null
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-movies--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-movies--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-movies--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-movies--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-movies--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-movies--id-" data-method="GET"
+      data-path="api/movies/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-movies--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-movies--id-"
+                    onclick="tryItOut('GETapi-movies--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-movies--id-"
+                    onclick="cancelTryOut('GETapi-movies--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-movies--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/movies/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-movies--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-movies--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-movies--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the movie. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="movie-management-GETapi-movies--id--related">GET api/movies/{id}/related</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-movies--id--related">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/movies/1/related" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/movies/1/related"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-movies--id--related">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 56
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: 8,
+        &quot;title&quot;: &quot;Et sint.&quot;,
+        &quot;summary&quot;: &quot;Voluptatibus adipisci vitae voluptatem quia magnam blanditiis. Sed error similique ab ut. Occaecati quia nihil occaecati totam aut consequatur sit consequatur. Nobis molestias totam labore eum eaque doloremque accusamus.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/005522?text=movies+ex&quot;,
+        &quot;genres&quot;: &quot;Sci-Fi&quot;,
+        &quot;author&quot;: &quot;Robert Wilson&quot;,
+        &quot;tags&quot;: &quot;Adventure,Romance,Mystery&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;10.0&quot;,
+        &quot;pdf_download_link&quot;: null
+    },
+    {
+        &quot;id&quot;: 18,
+        &quot;title&quot;: &quot;Illum qui architecto.&quot;,
+        &quot;summary&quot;: &quot;Esse explicabo ipsa autem omnis nisi sequi. Dolorem quaerat quasi cupiditate ratione et rem nihil pariatur. Sit nihil numquam ab.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/0066aa?text=movies+nostrum&quot;,
+        &quot;genres&quot;: &quot;Action&quot;,
+        &quot;author&quot;: &quot;Jane Smith&quot;,
+        &quot;tags&quot;: &quot;Thriller,Mystery,Adventure&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;9.9&quot;,
+        &quot;pdf_download_link&quot;: null
+    },
+    {
+        &quot;id&quot;: 27,
+        &quot;title&quot;: &quot;Sit magni possimus adipisci.&quot;,
+        &quot;summary&quot;: &quot;Mollitia esse voluptatum architecto aut ut. Sint natus est aut blanditiis quis voluptatibus omnis. Voluptatibus soluta rerum aut magni. Recusandae aut cumque exercitationem quia minima ut. Earum qui iusto sunt modi.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/0088aa?text=movies+rerum&quot;,
+        &quot;genres&quot;: &quot;Sci-Fi&quot;,
+        &quot;author&quot;: &quot;Michael Johnson&quot;,
+        &quot;tags&quot;: &quot;Romance,Adventure,Mystery&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;9.7&quot;,
+        &quot;pdf_download_link&quot;: null
+    },
+    {
+        &quot;id&quot;: 30,
+        &quot;title&quot;: &quot;Aut enim sed.&quot;,
+        &quot;summary&quot;: &quot;Temporibus ut atque et neque. Itaque ipsa enim ut sequi aut voluptates perspiciatis totam.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/003344?text=movies+ut&quot;,
+        &quot;genres&quot;: &quot;Drama&quot;,
+        &quot;author&quot;: &quot;Emily Davis&quot;,
+        &quot;tags&quot;: &quot;Adventure,Romance,Fantasy&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;9.7&quot;,
+        &quot;pdf_download_link&quot;: null
+    },
+    {
+        &quot;id&quot;: 21,
+        &quot;title&quot;: &quot;Quisquam et.&quot;,
+        &quot;summary&quot;: &quot;Molestiae dicta excepturi qui ex et. Quae reprehenderit qui deleniti non. Et nam distinctio iure dolor.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/005533?text=movies+sed&quot;,
+        &quot;genres&quot;: &quot;Action&quot;,
+        &quot;author&quot;: &quot;Robert Wilson&quot;,
+        &quot;tags&quot;: &quot;Romance,Adventure,Fantasy&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;9.3&quot;,
+        &quot;pdf_download_link&quot;: null
+    },
+    {
+        &quot;id&quot;: 33,
+        &quot;title&quot;: &quot;Nobis doloremque ducimus aliquid.&quot;,
+        &quot;summary&quot;: &quot;Ipsum nemo ipsam placeat ut illo labore. Sequi aliquid vero at eius officiis et inventore. Soluta rerum nesciunt dolores voluptas voluptatem sint.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/00ddee?text=movies+aliquam&quot;,
+        &quot;genres&quot;: &quot;Comedy&quot;,
+        &quot;author&quot;: &quot;Robert Wilson&quot;,
+        &quot;tags&quot;: &quot;Romance,Thriller,Fantasy&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:27:55.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;9.3&quot;,
+        &quot;pdf_download_link&quot;: null
+    },
+    {
+        &quot;id&quot;: 16,
+        &quot;title&quot;: &quot;Aut exercitationem et.&quot;,
+        &quot;summary&quot;: &quot;Voluptatem architecto et ut est dolor quia doloribus. Nisi voluptas fuga eaque voluptatum perferendis.&quot;,
+        &quot;cover_image&quot;: &quot;https://via.placeholder.com/640x480.png/003377?text=movies+consequatur&quot;,
+        &quot;genres&quot;: &quot;Drama&quot;,
+        &quot;author&quot;: &quot;John Doe&quot;,
+        &quot;tags&quot;: &quot;Fantasy,Adventure,Romance&quot;,
+        &quot;created_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-09-17T15:17:16.000000Z&quot;,
+        &quot;imdb_rating&quot;: &quot;8.9&quot;,
+        &quot;pdf_download_link&quot;: null
+    }
+]</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-movies--id--related" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-movies--id--related"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-movies--id--related"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-movies--id--related" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-movies--id--related">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-movies--id--related" data-method="GET"
+      data-path="api/movies/{id}/related"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-movies--id--related', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-movies--id--related"
+                    onclick="tryItOut('GETapi-movies--id--related');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-movies--id--related"
+                    onclick="cancelTryOut('GETapi-movies--id--related');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-movies--id--related"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/movies/{id}/related</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-movies--id--related"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-movies--id--related"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-movies--id--related"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the movie. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>

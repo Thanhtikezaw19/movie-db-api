@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+/**
+ * @group Auth Management
+ *
+ * APIs to manage the Auth resource
+ */
+
 class AuthController extends Controller
 {
     public function register(Request $request)

@@ -1,0 +1,839 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/register:
+    post:
+      summary: ''
+      operationId: postApiRegister
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Auth Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: gstnchhfigqarazflkyorzird
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: crooks.barney@example.org
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: yboCNBCa)
+              required:
+                - name
+                - email
+                - password
+      security: []
+  /api/login:
+    post:
+      summary: ''
+      operationId: postApiLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Auth Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: murphy.prosacco@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: '0tW;*3)dXZ7@bb'
+              required:
+                - email
+                - password
+      security: []
+  '/api/movies/{id}/comments':
+    post:
+      summary: ''
+      operationId: postApiMoviesIdComments
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Comment Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: vernie23@example.org
+                body:
+                  type: string
+                  description: ''
+                  example: eos
+              required:
+                - email
+                - body
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the movie.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/healthcheck:
+    get:
+      summary: ''
+      operationId: getApiHealthcheck
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: up
+                  services:
+                    database: up
+                    redis: up
+                properties:
+                  status:
+                    type: string
+                    example: up
+                  services:
+                    type: object
+                    properties:
+                      database:
+                        type: string
+                        example: up
+                      redis:
+                        type: string
+                        example: up
+      tags:
+        - Endpoints
+      security: []
+  /api/movies:
+    post:
+      summary: ''
+      operationId: postApiMovies
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Movie Management'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: ad
+                summary:
+                  type: string
+                  description: ''
+                  example: voluptas
+                cover_image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                genres:
+                  type: string
+                  description: ''
+                  example: iusto
+                author:
+                  type: string
+                  description: ''
+                  example: ipsa
+                tags:
+                  type: string
+                  description: ''
+                  example: eos
+                imdb_rating:
+                  type: number
+                  description: 'Must be at least 0. Must not be greater than 10.'
+                  example: 4
+              required:
+                - title
+                - summary
+                - cover_image
+                - genres
+                - author
+                - tags
+      security: []
+    get:
+      summary: ''
+      operationId: getApiMovies
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    current_page: 1
+                    data:
+                      -
+                        id: 1
+                        title: 'Quidem voluptas officia.'
+                        summary: 'Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores'
+                        genres: Sci-Fi
+                        author: 'Michael Johnson'
+                        tags: 'Romance,Thriller,Fantasy'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '6.1'
+                        pdf_download_link: 'http://localhost/api/movies/1/download-pdf'
+                        comments: []
+                      -
+                        id: 2
+                        title: 'Iusto qui hic.'
+                        summary: 'Sunt molestiae non recusandae quia. Nesciunt perspiciatis voluptatem eos beatae. Voluptatem adipisci ut eaque laboriosam sit ea.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/00ddaa?text=movies+inventore'
+                        genres: Horror
+                        author: 'Michael Johnson'
+                        tags: 'Thriller,Romance,Adventure'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '2.3'
+                        pdf_download_link: 'http://localhost/api/movies/2/download-pdf'
+                        comments: []
+                      -
+                        id: 3
+                        title: 'Quas atque.'
+                        summary: 'Culpa perspiciatis quidem dicta necessitatibus error. Perferendis maiores expedita sequi in fugit atque. Inventore et eaque impedit quia. Natus ipsum voluptas est quisquam ea voluptatem debitis.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/007700?text=movies+dolore'
+                        genres: Drama
+                        author: 'Jane Smith'
+                        tags: 'Mystery,Fantasy,Thriller'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '1.8'
+                        pdf_download_link: 'http://localhost/api/movies/3/download-pdf'
+                        comments: []
+                      -
+                        id: 4
+                        title: 'Aliquid mollitia dolores enim.'
+                        summary: 'Magnam illum omnis incidunt natus quod omnis voluptas. Est facere et labore minima aliquam debitis fuga eligendi. Neque enim sint velit tempore ipsum inventore.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/003300?text=movies+et'
+                        genres: Comedy
+                        author: 'Jane Smith'
+                        tags: 'Thriller,Romance,Fantasy'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '4.5'
+                        pdf_download_link: 'http://localhost/api/movies/4/download-pdf'
+                        comments: []
+                      -
+                        id: 5
+                        title: 'Aliquam reiciendis dolores.'
+                        summary: 'Ut ipsa dignissimos ex pariatur. Facilis et non quibusdam quos debitis. Accusantium possimus dolorum fugiat ut. Dolore autem voluptas sequi tempora commodi reprehenderit dolorem. Qui molestiae cumque sint autem illo est ducimus.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/00ffee?text=movies+repellendus'
+                        genres: Comedy
+                        author: 'Jane Smith'
+                        tags: 'Mystery,Adventure,Thriller'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '4.1'
+                        pdf_download_link: 'http://localhost/api/movies/5/download-pdf'
+                        comments: []
+                      -
+                        id: 6
+                        title: 'Aut animi et facilis placeat.'
+                        summary: 'Quibusdam consequatur molestias animi accusamus quia rerum fugit. Ea eligendi cum cum maiores veritatis. Voluptates explicabo et sunt et.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/002211?text=movies+est'
+                        genres: Drama
+                        author: 'Michael Johnson'
+                        tags: 'Fantasy,Adventure,Romance'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '2.5'
+                        pdf_download_link: 'http://localhost/api/movies/6/download-pdf'
+                        comments: []
+                      -
+                        id: 7
+                        title: 'Autem quod.'
+                        summary: 'Nemo quo reprehenderit beatae et qui maxime et sit. Tempore doloribus et at. Nihil tempora quos consequatur. Et sed et suscipit similique est necessitatibus placeat.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/000022?text=movies+aut'
+                        genres: Drama
+                        author: 'John Doe'
+                        tags: 'Romance,Mystery,Fantasy'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '2.9'
+                        pdf_download_link: 'http://localhost/api/movies/7/download-pdf'
+                        comments: []
+                      -
+                        id: 8
+                        title: 'Et sint.'
+                        summary: 'Voluptatibus adipisci vitae voluptatem quia magnam blanditiis. Sed error similique ab ut. Occaecati quia nihil occaecati totam aut consequatur sit consequatur. Nobis molestias totam labore eum eaque doloremque accusamus.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/005522?text=movies+ex'
+                        genres: Sci-Fi
+                        author: 'Robert Wilson'
+                        tags: 'Adventure,Romance,Mystery'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '10.0'
+                        pdf_download_link: 'http://localhost/api/movies/8/download-pdf'
+                        comments: []
+                      -
+                        id: 9
+                        title: 'Totam nemo et.'
+                        summary: 'Veniam qui sequi facere porro iste. Beatae praesentium dolorum quis qui et assumenda atque culpa. Eius doloremque sapiente ut reprehenderit. Illo fuga dolor labore amet ipsum.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/0066ff?text=movies+voluptatibus'
+                        genres: Sci-Fi
+                        author: 'John Doe'
+                        tags: 'Adventure,Fantasy,Romance'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '2.7'
+                        pdf_download_link: 'http://localhost/api/movies/9/download-pdf'
+                        comments: []
+                      -
+                        id: 10
+                        title: 'Ducimus voluptatem totam.'
+                        summary: 'Corporis ea et assumenda sed. Est eligendi perspiciatis ad mollitia amet dolorum. Exercitationem nemo aut vel aut. Nihil et eius exercitationem quibusdam. Et qui architecto dolorum sed magni beatae aut.'
+                        cover_image: 'https://via.placeholder.com/640x480.png/000088?text=movies+est'
+                        genres: Drama
+                        author: 'Jane Smith'
+                        tags: 'Adventure,Romance,Thriller'
+                        created_at: '2023-09-17T15:17:16.000000Z'
+                        updated_at: '2023-09-17T15:17:16.000000Z'
+                        imdb_rating: '8.2'
+                        pdf_download_link: 'http://localhost/api/movies/10/download-pdf'
+                        comments: []
+                    first_page_url: 'http://localhost/api/movies?page=1'
+                    from: 1
+                    last_page: 4
+                    last_page_url: 'http://localhost/api/movies?page=4'
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost/api/movies?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'http://localhost/api/movies?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'http://localhost/api/movies?page=3'
+                        label: '3'
+                        active: false
+                      -
+                        url: 'http://localhost/api/movies?page=4'
+                        label: '4'
+                        active: false
+                      -
+                        url: 'http://localhost/api/movies?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    next_page_url: 'http://localhost/api/movies?page=2'
+                    path: 'http://localhost/api/movies'
+                    per_page: 10
+                    prev_page_url: null
+                    to: 10
+                    total: 40
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      data:
+                        type: array
+                        example:
+                          -
+                            id: 1
+                            title: 'Quidem voluptas officia.'
+                            summary: 'Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores'
+                            genres: Sci-Fi
+                            author: 'Michael Johnson'
+                            tags: 'Romance,Thriller,Fantasy'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '6.1'
+                            pdf_download_link: 'http://localhost/api/movies/1/download-pdf'
+                            comments: []
+                          -
+                            id: 2
+                            title: 'Iusto qui hic.'
+                            summary: 'Sunt molestiae non recusandae quia. Nesciunt perspiciatis voluptatem eos beatae. Voluptatem adipisci ut eaque laboriosam sit ea.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/00ddaa?text=movies+inventore'
+                            genres: Horror
+                            author: 'Michael Johnson'
+                            tags: 'Thriller,Romance,Adventure'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '2.3'
+                            pdf_download_link: 'http://localhost/api/movies/2/download-pdf'
+                            comments: []
+                          -
+                            id: 3
+                            title: 'Quas atque.'
+                            summary: 'Culpa perspiciatis quidem dicta necessitatibus error. Perferendis maiores expedita sequi in fugit atque. Inventore et eaque impedit quia. Natus ipsum voluptas est quisquam ea voluptatem debitis.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/007700?text=movies+dolore'
+                            genres: Drama
+                            author: 'Jane Smith'
+                            tags: 'Mystery,Fantasy,Thriller'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '1.8'
+                            pdf_download_link: 'http://localhost/api/movies/3/download-pdf'
+                            comments: []
+                          -
+                            id: 4
+                            title: 'Aliquid mollitia dolores enim.'
+                            summary: 'Magnam illum omnis incidunt natus quod omnis voluptas. Est facere et labore minima aliquam debitis fuga eligendi. Neque enim sint velit tempore ipsum inventore.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/003300?text=movies+et'
+                            genres: Comedy
+                            author: 'Jane Smith'
+                            tags: 'Thriller,Romance,Fantasy'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '4.5'
+                            pdf_download_link: 'http://localhost/api/movies/4/download-pdf'
+                            comments: []
+                          -
+                            id: 5
+                            title: 'Aliquam reiciendis dolores.'
+                            summary: 'Ut ipsa dignissimos ex pariatur. Facilis et non quibusdam quos debitis. Accusantium possimus dolorum fugiat ut. Dolore autem voluptas sequi tempora commodi reprehenderit dolorem. Qui molestiae cumque sint autem illo est ducimus.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/00ffee?text=movies+repellendus'
+                            genres: Comedy
+                            author: 'Jane Smith'
+                            tags: 'Mystery,Adventure,Thriller'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '4.1'
+                            pdf_download_link: 'http://localhost/api/movies/5/download-pdf'
+                            comments: []
+                          -
+                            id: 6
+                            title: 'Aut animi et facilis placeat.'
+                            summary: 'Quibusdam consequatur molestias animi accusamus quia rerum fugit. Ea eligendi cum cum maiores veritatis. Voluptates explicabo et sunt et.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/002211?text=movies+est'
+                            genres: Drama
+                            author: 'Michael Johnson'
+                            tags: 'Fantasy,Adventure,Romance'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '2.5'
+                            pdf_download_link: 'http://localhost/api/movies/6/download-pdf'
+                            comments: []
+                          -
+                            id: 7
+                            title: 'Autem quod.'
+                            summary: 'Nemo quo reprehenderit beatae et qui maxime et sit. Tempore doloribus et at. Nihil tempora quos consequatur. Et sed et suscipit similique est necessitatibus placeat.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/000022?text=movies+aut'
+                            genres: Drama
+                            author: 'John Doe'
+                            tags: 'Romance,Mystery,Fantasy'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '2.9'
+                            pdf_download_link: 'http://localhost/api/movies/7/download-pdf'
+                            comments: []
+                          -
+                            id: 8
+                            title: 'Et sint.'
+                            summary: 'Voluptatibus adipisci vitae voluptatem quia magnam blanditiis. Sed error similique ab ut. Occaecati quia nihil occaecati totam aut consequatur sit consequatur. Nobis molestias totam labore eum eaque doloremque accusamus.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/005522?text=movies+ex'
+                            genres: Sci-Fi
+                            author: 'Robert Wilson'
+                            tags: 'Adventure,Romance,Mystery'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '10.0'
+                            pdf_download_link: 'http://localhost/api/movies/8/download-pdf'
+                            comments: []
+                          -
+                            id: 9
+                            title: 'Totam nemo et.'
+                            summary: 'Veniam qui sequi facere porro iste. Beatae praesentium dolorum quis qui et assumenda atque culpa. Eius doloremque sapiente ut reprehenderit. Illo fuga dolor labore amet ipsum.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/0066ff?text=movies+voluptatibus'
+                            genres: Sci-Fi
+                            author: 'John Doe'
+                            tags: 'Adventure,Fantasy,Romance'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '2.7'
+                            pdf_download_link: 'http://localhost/api/movies/9/download-pdf'
+                            comments: []
+                          -
+                            id: 10
+                            title: 'Ducimus voluptatem totam.'
+                            summary: 'Corporis ea et assumenda sed. Est eligendi perspiciatis ad mollitia amet dolorum. Exercitationem nemo aut vel aut. Nihil et eius exercitationem quibusdam. Et qui architecto dolorum sed magni beatae aut.'
+                            cover_image: 'https://via.placeholder.com/640x480.png/000088?text=movies+est'
+                            genres: Drama
+                            author: 'Jane Smith'
+                            tags: 'Adventure,Romance,Thriller'
+                            created_at: '2023-09-17T15:17:16.000000Z'
+                            updated_at: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating: '8.2'
+                            pdf_download_link: 'http://localhost/api/movies/10/download-pdf'
+                            comments: []
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            title:
+                              type: string
+                              example: 'Quidem voluptas officia.'
+                            summary:
+                              type: string
+                              example: 'Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.'
+                            cover_image:
+                              type: string
+                              example: 'https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores'
+                            genres:
+                              type: string
+                              example: Sci-Fi
+                            author:
+                              type: string
+                              example: 'Michael Johnson'
+                            tags:
+                              type: string
+                              example: 'Romance,Thriller,Fantasy'
+                            created_at:
+                              type: string
+                              example: '2023-09-17T15:17:16.000000Z'
+                            updated_at:
+                              type: string
+                              example: '2023-09-17T15:17:16.000000Z'
+                            imdb_rating:
+                              type: string
+                              example: '6.1'
+                            pdf_download_link:
+                              type: string
+                              example: 'http://localhost/api/movies/1/download-pdf'
+                            comments:
+                              type: array
+                              example: []
+                      first_page_url:
+                        type: string
+                        example: 'http://localhost/api/movies?page=1'
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 4
+                      last_page_url:
+                        type: string
+                        example: 'http://localhost/api/movies?page=4'
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost/api/movies?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'http://localhost/api/movies?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'http://localhost/api/movies?page=3'
+                            label: '3'
+                            active: false
+                          -
+                            url: 'http://localhost/api/movies?page=4'
+                            label: '4'
+                            active: false
+                          -
+                            url: 'http://localhost/api/movies?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      next_page_url:
+                        type: string
+                        example: 'http://localhost/api/movies?page=2'
+                      path:
+                        type: string
+                        example: 'http://localhost/api/movies'
+                      per_page:
+                        type: integer
+                        example: 10
+                      prev_page_url:
+                        type: string
+                        example: null
+                      to:
+                        type: integer
+                        example: 10
+                      total:
+                        type: integer
+                        example: 40
+      tags:
+        - 'Movie Management'
+      security: []
+  '/api/movies/{id}':
+    put:
+      summary: ''
+      operationId: putApiMoviesId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Movie Management'
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiMoviesId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Movie Management'
+      security: []
+    get:
+      summary: ''
+      operationId: getApiMoviesId
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Quidem voluptas officia.'
+                  summary: 'Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.'
+                  cover_image: 'https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores'
+                  genres: Sci-Fi
+                  author: 'Michael Johnson'
+                  tags: 'Romance,Thriller,Fantasy'
+                  created_at: '2023-09-17T15:17:16.000000Z'
+                  updated_at: '2023-09-17T15:17:16.000000Z'
+                  imdb_rating: '6.1'
+                  pdf_download_link: null
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Quidem voluptas officia.'
+                  summary:
+                    type: string
+                    example: 'Voluptate quidem rem pariatur officiis voluptatem fugiat nam. Et nemo suscipit placeat. Sed ratione architecto officiis est tempore. Aspernatur et recusandae earum.'
+                  cover_image:
+                    type: string
+                    example: 'https://via.placeholder.com/640x480.png/00ee99?text=movies+asperiores'
+                  genres:
+                    type: string
+                    example: Sci-Fi
+                  author:
+                    type: string
+                    example: 'Michael Johnson'
+                  tags:
+                    type: string
+                    example: 'Romance,Thriller,Fantasy'
+                  created_at:
+                    type: string
+                    example: '2023-09-17T15:17:16.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-09-17T15:17:16.000000Z'
+                  imdb_rating:
+                    type: string
+                    example: '6.1'
+                  pdf_download_link:
+                    type: string
+                    example: null
+      tags:
+        - 'Movie Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the movie.'
+        example: nihil
+        required: true
+        schema:
+          type: string
+  '/api/movies/{id}/related':
+    get:
+      summary: ''
+      operationId: getApiMoviesIdRelated
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 8
+                    title: 'Et sint.'
+                    summary: 'Voluptatibus adipisci vitae voluptatem quia magnam blanditiis. Sed error similique ab ut. Occaecati quia nihil occaecati totam aut consequatur sit consequatur. Nobis molestias totam labore eum eaque doloremque accusamus.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/005522?text=movies+ex'
+                    genres: Sci-Fi
+                    author: 'Robert Wilson'
+                    tags: 'Adventure,Romance,Mystery'
+                    created_at: '2023-09-17T15:17:16.000000Z'
+                    updated_at: '2023-09-17T15:17:16.000000Z'
+                    imdb_rating: '10.0'
+                    pdf_download_link: null
+                  -
+                    id: 18
+                    title: 'Illum qui architecto.'
+                    summary: 'Esse explicabo ipsa autem omnis nisi sequi. Dolorem quaerat quasi cupiditate ratione et rem nihil pariatur. Sit nihil numquam ab.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/0066aa?text=movies+nostrum'
+                    genres: Action
+                    author: 'Jane Smith'
+                    tags: 'Thriller,Mystery,Adventure'
+                    created_at: '2023-09-17T15:17:16.000000Z'
+                    updated_at: '2023-09-17T15:17:16.000000Z'
+                    imdb_rating: '9.9'
+                    pdf_download_link: null
+                  -
+                    id: 27
+                    title: 'Sit magni possimus adipisci.'
+                    summary: 'Mollitia esse voluptatum architecto aut ut. Sint natus est aut blanditiis quis voluptatibus omnis. Voluptatibus soluta rerum aut magni. Recusandae aut cumque exercitationem quia minima ut. Earum qui iusto sunt modi.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/0088aa?text=movies+rerum'
+                    genres: Sci-Fi
+                    author: 'Michael Johnson'
+                    tags: 'Romance,Adventure,Mystery'
+                    created_at: '2023-09-17T15:27:55.000000Z'
+                    updated_at: '2023-09-17T15:27:55.000000Z'
+                    imdb_rating: '9.7'
+                    pdf_download_link: null
+                  -
+                    id: 30
+                    title: 'Aut enim sed.'
+                    summary: 'Temporibus ut atque et neque. Itaque ipsa enim ut sequi aut voluptates perspiciatis totam.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/003344?text=movies+ut'
+                    genres: Drama
+                    author: 'Emily Davis'
+                    tags: 'Adventure,Romance,Fantasy'
+                    created_at: '2023-09-17T15:27:55.000000Z'
+                    updated_at: '2023-09-17T15:27:55.000000Z'
+                    imdb_rating: '9.7'
+                    pdf_download_link: null
+                  -
+                    id: 21
+                    title: 'Quisquam et.'
+                    summary: 'Molestiae dicta excepturi qui ex et. Quae reprehenderit qui deleniti non. Et nam distinctio iure dolor.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/005533?text=movies+sed'
+                    genres: Action
+                    author: 'Robert Wilson'
+                    tags: 'Romance,Adventure,Fantasy'
+                    created_at: '2023-09-17T15:27:55.000000Z'
+                    updated_at: '2023-09-17T15:27:55.000000Z'
+                    imdb_rating: '9.3'
+                    pdf_download_link: null
+                  -
+                    id: 33
+                    title: 'Nobis doloremque ducimus aliquid.'
+                    summary: 'Ipsum nemo ipsam placeat ut illo labore. Sequi aliquid vero at eius officiis et inventore. Soluta rerum nesciunt dolores voluptas voluptatem sint.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/00ddee?text=movies+aliquam'
+                    genres: Comedy
+                    author: 'Robert Wilson'
+                    tags: 'Romance,Thriller,Fantasy'
+                    created_at: '2023-09-17T15:27:55.000000Z'
+                    updated_at: '2023-09-17T15:27:55.000000Z'
+                    imdb_rating: '9.3'
+                    pdf_download_link: null
+                  -
+                    id: 16
+                    title: 'Aut exercitationem et.'
+                    summary: 'Voluptatem architecto et ut est dolor quia doloribus. Nisi voluptas fuga eaque voluptatum perferendis.'
+                    cover_image: 'https://via.placeholder.com/640x480.png/003377?text=movies+consequatur'
+                    genres: Drama
+                    author: 'John Doe'
+                    tags: 'Fantasy,Adventure,Romance'
+                    created_at: '2023-09-17T15:17:16.000000Z'
+                    updated_at: '2023-09-17T15:17:16.000000Z'
+                    imdb_rating: '8.9'
+                    pdf_download_link: null
+      tags:
+        - 'Movie Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the movie.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: 'Auth Management'
+    description: "\nAPIs to manage the Auth resource"
+  -
+    name: 'Comment Management'
+    description: "\nAPIs to manage the comment resource"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'Movie Management'
+    description: "\nAPIs to manage the movie resource"
